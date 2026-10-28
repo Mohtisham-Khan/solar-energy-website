@@ -46,7 +46,7 @@ export default function ServicesPage() {
         ])}
       />
 
-      {/* ================================ HERO ================================ */}
+      {/*  HERO  */}
       <section>
         {/* gradient: white -> sky blue */}
         <div className="bg-[linear-gradient(to_bottom,#fff_0%,#8fe0ff_55%)] px-5 pb-[200px] pt-14 text-center md:pb-[360px] md:pt-20">
@@ -93,7 +93,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ============================ SERVICE DETAIL ========================== */}
+      {/*  SERVICE DETAIL  */}
       <section className="wrap pb-16 md:pb-28 pt-4 md:pt-8">
         <div>
           <Reveal>
@@ -167,7 +167,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ============================== CTA BAND ============================== */}
+      {/*  CTA BAND  */}
       <CtaSection
         eyebrow="Get In Touch"
         heading="Ready to Switch to Solar and Save for Years?"

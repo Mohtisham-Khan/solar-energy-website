@@ -269,7 +269,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* closing band */}
+      {/* cta */}
       <CtaSection
         eyebrow="Get In Touch"
         heading="Ready to Switch to Solar?"
@@ -278,31 +278,6 @@ export default function ContactPage() {
         href={waLink("Hi Sunhaven Solar! I'd like a free solar quote.")}
         checks={ctaChecks}
       />
-
-
-
-      <section className="relative overflow-hidden bg-cream">
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-56 md:h-72">
-          <SkyHills className="h-full w-full" />
-        </div>
-        <div className="wrap relative flex flex-col items-center py-24 text-center">
-          <SplitHeading
-            gradient
-            text="Ready to Switch to Solar?"
-            className="text-gradient mx-auto max-w-2xl text-4xl font-semibold leading-tight md:text-5xl"
-          />
-          <Reveal delay={0.15} className="mt-6 flex flex-col items-center">
-            <div>
-              <ButtonLink
-                href={waLink("Hi Sunhaven Solar! I'd like a free solar quote.")}
-                variant="lime"
-              >
-                Get A Free Solar Quote
-              </ButtonLink>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }
