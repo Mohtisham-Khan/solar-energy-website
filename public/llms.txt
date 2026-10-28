@@ -1,0 +1,18 @@
+# Sunhaven Solar
+
+> Sunhaven Solar is a licensed, insured solar installation company based in Austin, Texas, founded in 2014. It designs, installs, monitors and maintains rooftop solar panel and battery storage systems for homes and businesses across Greater Austin and Central Texas, with fixed up-front quotes, a 25-year panel warranty and a 10-year workmanship warranty.
+
+Sunhaven Solar helps homeowners and businesses cut electricity bills with rooftop solar, battery backup and ongoing monitoring. The primary way to contact the team is a WhatsApp chat line that answers in minutes during business hours. The site includes a free savings calculator that estimates system size, cost after the 30% federal clean energy credit, yearly savings and 25-year payback, with every assumption disclosed.
+
+## Pages
+
+- [Home](https://www.sunhavensolar.com/): Services overview, company statistics,4-step process, customer testimonials and FAQs
+- [Services](https://www.sunhavensolar.com/services): Residential solar installation, commercial & industrial solar, solar battery storage, and maintenance & system monitoring
+- [Savings Calculator](https://www.sunhavensolar.com/calculator): Free, no-signup tool estimating system size, installation cost, yearly savings and payback period
+- [About](https://www.sunhavensolar.com/about): Company story since 2014, four operating values and the team
+- [Contact](https://www.sunhavensolar.com/contact): WhatsApp, phone, email, office address, opening hours and service areas
+
+## Optional
+
+- [WhatsApp chat](https://wa.me/15550100142): Message the team directly for a free consultation
+- [Sitemap](https://www.sunhavensolar.com/sitemap.xml): Full list of public pages
