@@ -154,6 +154,42 @@ export function suitabilityLine(
  * into package/quotation mode. Kept entirely separate from sizing above.
  * ----------------------------------------------------------------------- */
 
+/**
+ * Conservative monthly saving estimate (PKR) for the covered share of usage.
+ * Low: covered units valued at a blend of the on-site tariff and the
+ * net-billing export rate (only the self-consumed share earns the full
+ * tariff). High: every covered unit valued at the blended tariff.
+ */
+export function savingEstimate(
+  monthlyUnits: number,
+  coverageAchievedPct: number,
+  monthlyLow: number,
+  monthlyHigh: number,
+): { lowPkr: number; highPkr: number } {
+  // Units the system can cover: the target share of consumption, capped by
+  // what it actually generates in a weak (low) and a strong (high) month.
+  const target =
+    (Math.max(0, monthlyUnits) * clampNumber(coverageAchievedPct, 0, 100)) / 100;
+  const coveredLow = Math.min(target, monthlyLow);
+  const coveredHigh = Math.min(target, monthlyHigh);
+  const blended =
+    cfg.selfConsumption * cfg.avgTariffPerKwh +
+    (1 - cfg.selfConsumption) * cfg.netBillingBuybackPerKwh;
+  return {
+    lowPkr: Math.round(coveredLow * blended),
+    highPkr: Math.round(coveredHigh * cfg.avgTariffPerKwh),
+  };
+}
+
+/** Payback in years for a total cost against a monthly saving. null ⇒ n/a. */
+export function paybackYears(
+  totalPkr: number,
+  monthlySavingPkr: number,
+): number | null {
+  if (monthlySavingPkr <= 0) return null;
+  return Math.round((totalPkr / (monthlySavingPkr * 12)) * 10) / 10;
+}
+
 export type PackageVariantView = SolarPackage["variants"][number];
 
 /** All capacity options available for package selection. */

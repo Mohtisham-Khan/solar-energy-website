@@ -3,7 +3,7 @@ import { ArrowUpRight } from "@/components/icons";
 import { CountUp } from "@/components/motion/effects";
 
 export type AboutStatWidget = {
-  value: number;
+  value: number | string;
   suffix: string;
   label: string;
   description: string;

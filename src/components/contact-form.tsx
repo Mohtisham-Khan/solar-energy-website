@@ -1,15 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { services } from "@/lib/content";
 import { waLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/icons";
+
+type Service = {
+  slug: string;
+  title: string;
+};
+
+type ContactFormProps = {
+  services: Service[];
+};
 
 /**
  * Contact form that composes a WhatsApp message — no backend required.
  * The page itself stays server-rendered; this is the only client piece.
  */
-export function ContactForm() {
+export function ContactForm({ services }: ContactFormProps) {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [interest, setInterest] = useState(services[0].title);
@@ -24,7 +32,7 @@ export function ContactForm() {
     }
     setError("");
     const text = [
-      `Hi Sunhaven Solar! My name is ${name.trim()}.`,
+      `Hello! My name is ${name.trim()}.`,
       `I'm interested in: ${interest}.`,
       message.trim() ? `Message: ${message.trim()}` : "",
       `You can reach me at: ${contact.trim()}`,
@@ -59,7 +67,7 @@ export function ContactForm() {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Jane Doe"
+            placeholder="Ayesha Khan"
             className={`${inputClass} mt-1.5`}
           />
         </div>
@@ -73,7 +81,7 @@ export function ContactForm() {
             required
             value={contact}
             onChange={(e) => setContact(e.target.value)}
-            placeholder="512-555-0134 or you@email.com"
+            placeholder="03XX XXXXXXX or you@email.com"
             className={`${inputClass} mt-1.5`}
           />
         </div>
@@ -105,8 +113,7 @@ export function ContactForm() {
             id="cf-message"
             rows={4}
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Tell us about your roof, your bill, or ask anything…"
+            onChange={(e) => setMessage(e.target.value)}              placeholder="Tell us about your roof, your bill, or ask anything…"
             className={`${inputClass} mt-1.5 resize-y`}
           />
         </div>

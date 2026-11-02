@@ -4,16 +4,16 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
 
-  --color-cream: #f8f8f3;
-  --color-card: #f3f5f4;
-  --color-line: #edede2;
-  --color-ink: #0c0c0c;
-  --color-muted: #4e4e4e;
-  --color-forest: #16422d;
-  --color-olive: #8ba960;
-  --color-lime: #e4fe55;
-  --color-lime-2: #d5f03f;
-  --color-sky: #cae6ff;
+  --color-cream: #fbf7f0;
+  --color-card: #ffffff;
+  --color-line: #d9d2c4;
+  --color-ink: #1e2a23;
+  --color-muted: #5c5648;
+  --color-forest: #1f5c46;
+  --color-olive: #8a7b4f;
+  --color-lime: #e4b23c;
+  --color-lime-2: #c99a2e;
+  --color-sky: #dce9e4;
   --color-wa: #25d366;
   --color-wa-2: #1fbe5b;
 
@@ -70,9 +70,9 @@
     padding-inline: 1rem;
   }
 
-  /* Signature heading treatment: olive → near-black sweep */
+  /* Signature heading treatment: sand-olive → deep pine sweep */
   .text-gradient {
-    background-image: linear-gradient(90deg, #8ba960, #0c0c0c);
+    background-image: linear-gradient(90deg, #8a7b4f, #1e2a23);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -80,7 +80,7 @@
   }
 
   .text-gradient-invert {
-    background-image: linear-gradient(90deg, #e4fe55, #f8f8f3);
+    background-image: linear-gradient(90deg, #e4b23c, #fbf7f0);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -102,7 +102,7 @@
   }
 
   .badge-light {
-    border-color: rgba(248, 248, 243, 0.5);
+    border-color: rgba(251, 247, 240, 0.5);
     color: var(--color-cream);
   }
 

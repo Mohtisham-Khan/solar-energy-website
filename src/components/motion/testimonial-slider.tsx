@@ -2,19 +2,29 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { testimonials } from "@/lib/content";
+
+type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  initials: string;
+};
+
+type TestimonialSliderProps = {
+  testimonials: Testimonial[];
+};
 
 /** Blocky double-quote mark traced from the reference design. */
 function QuoteGlyph({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 73 53" className={className} aria-hidden="true">
       {[0, 41].map((x) => (
-        <g key={x} transform={`translate(${x} 0)`} fill="#c8e622">
+        <g key={x} transform={`translate(${x} 0)`} fill="#e4b23c">
           <path d="M0 7a7 7 0 0 1 7-7h18a7 7 0 0 1 7 7v20a7 7 0 0 1-7 7H0Z" />
           <path
             d="M3 26v12c0 8 4 13 11 12.5"
             fill="none"
-            stroke="#c8e622"
+            stroke="#e4b23c"
             strokeWidth="6"
             strokeLinecap="round"
           />
@@ -25,7 +35,7 @@ function QuoteGlyph({ className = "" }: { className?: string }) {
 }
 
 /** Testimonial carousel: sliding card + overlay chevrons/dots — pauses on hover. */
-export function TestimonialSlider() {
+export function TestimonialSlider({ testimonials }: TestimonialSliderProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const count = testimonials.length;
@@ -66,13 +76,13 @@ export function TestimonialSlider() {
                 </blockquote>
                 <span
                   aria-hidden="true"
-                  className="mt-[70px] block h-px bg-[#ededed]"
+                  className="mt-[70px] block h-px bg-line"
                 />
                 <figcaption className="mt-[19px]">
                   <span className="block text-[22px] font-semibold leading-[1.2] text-ink md:text-[26px]">
                     {t.name}
                   </span>
-                  <span className="mt-[12px] block max-w-[calc(100%-130px)] text-[15px] leading-[1.4] text-[#333] md:max-w-none md:text-[16px]">
+                  <span className="mt-[12px] block max-w-[calc(100%-130px)] text-[15px] leading-[1.4] text-muted md:max-w-none md:text-[16px]">
                     {t.role}
                   </span>
                 </figcaption>
@@ -123,7 +133,7 @@ export function TestimonialSlider() {
               aria-label={`Go to testimonial ${i + 1}`}
               aria-current={i === index}
               className={`h-2 w-2 rounded-full transition-colors duration-300 ${
-                i === index ? "bg-[#222222]" : "bg-[#a7a7a7] hover:bg-[#8a8a8a]"
+                i === index ? "bg-ink" : "bg-[#b5ad9c] hover:bg-[#8f8674]"
               }`}
             />
           ))}

@@ -1,25 +1,45 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 import { WhatsAppIcon } from "@/components/icons";
-import { RoofScene, SkyHills } from "@/components/illustrations";
+import { RoofScene } from "@/components/illustrations";
 import { JsonLd } from "@/components/json-ld";
 import { ButtonLink, Eyebrow } from "@/components/ui";
 import { Reveal, SplitHeading } from "@/components/motion/effects";
 import { breadcrumbJsonLd } from "@/lib/seo";
-import { SITE_URL, mailLink, site, telLink, waLink } from "@/lib/site";
+import { SITE_URL, mailLink, site, telLink, waLink, WA_GREETING } from "@/lib/site";
 import { CtaSection } from "@/components/cta-section";
 
+// Contact page services data
+const contactServices = [
+  {
+    slug: "residential-solar",
+    title: "Residential Solar Installation",
+  },
+  {
+    slug: "commercial-solar",
+    title: "Commercial & Industrial Solar",
+  },
+  {
+    slug: "solar-system-engineering",
+    title: "Solar System Engineering",
+  },
+  {
+    slug: "maintenance-monitoring",
+    title: "Installation & Maintenance",
+  },
+];
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact - Free Solar Quote in Karachi",
   description:
-    "Chat with Sunhaven Solar on WhatsApp, call +1 (555) 010-0142, or send a message — serving Austin, Round Rock, Cedar Park, Georgetown and Central Texas.",
+    "WhatsApp or call [BRAND NAME] for a free solar quote in Karachi - DHA, Clifton, Gulshan-e-Iqbal, North Nazimabad, Korangi, SITE and all over Karachi.",
   alternates: { canonical: "/contact" },
   openGraph: {
+    locale: site.locale,
     url: "/contact",
-    title: `Contact | ${site.name}`,
+    title: `Contact - Free Solar Quote in Karachi | ${site.name}`,
     description:
-      "Fastest reply is WhatsApp — we answer in minutes during business hours. Or call, email, or send the form.",
+      "Fastest reply is WhatsApp - we answer in minutes, Mon–Sat. Call, email, or send the form. Free site survey anywhere in Karachi.",
   },
 };
 
@@ -76,7 +96,7 @@ function PinIcon({ className = "h-6 w-6" }: { className?: string }) {
   );
 }
 
-const ctaChecks = ["No obligation", "Free site assessment", "Expert advice"];
+const ctaChecks = ["No obligation", "Free site survey", "Installments available"];
 
 
 export default function ContactPage() {
@@ -88,7 +108,7 @@ export default function ContactPage() {
           "@type": "ContactPage",
           url: `${SITE_URL}/contact`,
           name: `Contact ${site.name}`,
-          inLanguage: "en-US",
+          inLanguage: "en-PK",
           mainEntity: { "@id": `${SITE_URL}/#business` },
         }}
       />
@@ -109,13 +129,14 @@ export default function ContactPage() {
           mode="word"
           gradient
           onLoad
-          text="Let's Talk Solar"
+          text="Let's Talk Solar, Karachi"
           className="text-gradient mt-6 text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1.06]"
         />
         <Reveal delay={0.35} y={28}>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            WhatsApp is fastest — we usually reply within minutes during business
-            hours. No call center, no pushy follow-ups.
+            WhatsApp is the fastest route - we usually reply within minutes,
+            Mon–Sat. No call center, no pushy follow-ups. Free site survey
+            anywhere in Karachi.
           </p>
         </Reveal>
       </section>
@@ -127,9 +148,7 @@ export default function ContactPage() {
             {/* WhatsApp primary card */}
             <Reveal>
               <a
-                href={waLink(
-                  "Hi Sunhaven Solar! I'd like to talk about going solar.",
-                )}
+                href={waLink(WA_GREETING)}
                 className="group flex items-start gap-4 rounded-xl bg-wa p-6 text-white transition-colors hover:bg-wa-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-white/20">
@@ -214,7 +233,7 @@ export default function ContactPage() {
 
           <div className="lg:col-span-3">
             <Reveal delay={0.1}>
-              <ContactForm />
+              <ContactForm services={contactServices} />
             </Reveal>
           </div>
         </div>
@@ -230,7 +249,7 @@ export default function ContactPage() {
               </Reveal>
               <SplitHeading
                 gradient
-                text="Proudly Serving Central Texas"
+                text="Proudly Serving Karachi"
                 className="text-gradient mt-5 text-3xl font-semibold leading-tight md:text-4xl"
               />
               <Reveal delay={0.15}>
@@ -245,13 +264,13 @@ export default function ContactPage() {
                   ))}
                 </ul>
                 <p className="mt-5 text-sm leading-relaxed text-muted">
-                  Just outside these? Message us anyway — we regularly travel for
+                  Just outside these? Message us anyway - we regularly travel for
                   bigger projects.
                 </p>
                 <div className="mt-5">
                   <ButtonLink
                     href={waLink(
-                      "Hi! I'm just outside your listed service areas — do you travel?",
+                      "Hello! My area is [your area], Karachi - do you service it?",
                     )}
                     variant="ink"
                   >
@@ -272,10 +291,10 @@ export default function ContactPage() {
       {/* cta */}
       <CtaSection
         eyebrow="Get In Touch"
-        heading="Ready to Switch to Solar?"
-        paragraph=""
-        buttonText="Get A Free Solar Quote"
-        href={waLink("Hi Sunhaven Solar! I'd like a free solar quote.")}
+        heading="Book Your Free Site Survey Today"
+        paragraph="Free survey, no obligation, and installment options are available. Show us your bill and your rooftop - we'll tell you the size and the cost."
+        buttonText="Get a Free Solar Quote on WhatsApp"
+        href={waLink(WA_GREETING)}
         checks={ctaChecks}
       />
     </>

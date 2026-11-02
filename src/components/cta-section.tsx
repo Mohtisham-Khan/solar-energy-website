@@ -28,6 +28,7 @@ export function CtaSection({
         aria-hidden="true"
         fill
         sizes="100vw"
+        loading="lazy"
         className="object-cover"
       />
       <div className="wrap relative flex flex-col items-center py-24 text-center md:py-22">

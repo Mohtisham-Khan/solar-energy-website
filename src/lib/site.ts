@@ -1,53 +1,70 @@
 /**
  * Central site configuration — placeholder brand content.
- * Swap these values for the real business details before launch.
+ * Replace the [BRAND NAME] / [domain] / [Area] placeholders with the real
+ * business details before launch (see the placeholder table in the handoff).
+ *
+ * Canonical domain: set NEXT_PUBLIC_SITE_URL to the live domain, e.g.
+ * https://www.yourdomain.com — until then the placeholder below is used.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sunhavensolar.com"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://karachi-solar.example.com"
 ).replace(/\/$/, "");
 
+/** Default prefilled WhatsApp text used by every CTA on the site. */
+export const WA_GREETING =
+  "Hello! I'd like a free quote for a solar system in Karachi.";
+
 export const site = {
-  name: "Sunhaven Solar",
-  legalName: "Sunhaven Solar LLC",
-  tagline: "Solar done right for Central Texas homes and businesses",
+  name: "[BRAND NAME]",
+  legalName: "[BRAND NAME] (Pvt) Ltd",
+  tagline: "Solar panel installation for Karachi homes, factories and offices",
   description:
-    "Sunhaven Solar designs, installs, and maintains rooftop solar panels and battery storage for homes and businesses across Greater Austin, Texas. Fixed quotes, licensed installers, 25-year warranty.",
+    "[BRAND NAME] is a Karachi-based solar company: rooftop solar panel installation for homes and businesses across DHA, Clifton, Gulshan-e-Iqbal, North Nazimabad and the rest of Karachi. Free site survey, fixed quote, K-Electric paperwork handled, installments available.",
   url: SITE_URL,
-  locale: "en_US",
-  founded: "2014",
+  locale: "en_PK",
+  founded: "[YEAR]",
   copyrightYear: 2026,
 
-  phoneDisplay: "+1 (555) 010-0142",
-  /** International format, digits only — used by tel: links */
-  phone: "15550100142",
-  /** International format, digits only — used by wa.me links */
-  whatsapp: "15550100142",
-  email: "hello@sunhavensolar.com",
+  phoneDisplay: "[PHONE]",
+  /** International format, digits only (+923XXXXXXXXX) — used by tel: links */
+  phone: "[PHONE]",
+  /** International format, digits only (+923XXXXXXXXX) — used by wa.me links */
+  whatsapp: "[PHONE]",
+  email: "info@[domain]",
 
   address: {
-    streetAddress: "123 Sunshine Ave",
-    addressLocality: "Austin",
-    addressRegion: "TX",
-    postalCode: "78701",
-    addressCountry: "US",
+    streetAddress: "[Area]",
+    addressLocality: "Karachi",
+    addressRegion: "Sindh",
+    postalCode: "[POSTAL CODE]",
+    addressCountry: "PK",
   },
-  geo: { latitude: 30.2672, longitude: -97.7431 },
-  hours: "Mo-Fr 08:00-18:00, Sa 09:00-14:00",
-  hoursHuman: "Mon–Fri 8am–6pm · Sat 9am–2pm · Sun closed",
-  serviceArea: "Greater Austin and Central Texas",
+  /** Google Maps business listing (placeholder — replace with the real link). */
+  mapsUrl: "https://maps.google.com/?q=[BRAND+NAME]+Karachi",
+  /** Karachi city coordinates — used by LocalBusiness geo schema. */
+  geo: { latitude: 24.8607, longitude: 67.0011 },
+  hours: "Mo-Sa 10:00-20:00",
+  hoursHuman: "Mon–Sat 10am–8pm · Sunday closed",
+  serviceArea: "Karachi, Sindh",
   serviceAreas: [
-    "Austin",
-    "Round Rock",
-    "Cedar Park",
-    "Georgetown",
-    "Pflugerville",
-    "San Marcos",
+    "DHA",
+    "Clifton",
+    "Gulshan-e-Iqbal",
+    "Gulistan-e-Johar",
+    "North Nazimabad",
+    "PECHS",
+    "Bahria Town Karachi",
+    "Scheme 33",
+    "Malir",
+    "Korangi",
+    "SITE",
+    "Port Qasim",
   ],
 
   social: {
-    linkedin: "https://www.linkedin.com/",
-    instagram: "https://www.instagram.com/",
-    facebook: "https://www.facebook.com/",
+    linkedin: "https://www.linkedin.com/company/[BRAND]",
+    instagram: "https://www.instagram.com/[BRAND]",
+    facebook: "https://www.facebook.com/[BRAND]",
   },
 } as const;
 

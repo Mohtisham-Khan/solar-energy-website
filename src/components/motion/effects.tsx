@@ -156,19 +156,25 @@ export function CountUp({
   delay = 0,
   className = "",
 }: {
-  value: number;
+  /** Numeric target, or a literal placeholder string (e.g. "[X]+") that renders as-is. */
+  value: number | string;
   decimals?: number;
   prefix?: string;
   suffix?: string;
   delay?: number;
   className?: string;
 }) {
+  const isText = typeof value === "string";
+  const target = isText ? 0 : value;
   const format = (n: number) =>
-    `${prefix}${decimals ? n.toFixed(decimals) : Math.floor(n)}${suffix}`;
+    isText
+      ? (value as string)
+      : `${prefix}${decimals ? n.toFixed(decimals) : Math.floor(n)}${suffix}`;
 
   const ref = useGsapScope<HTMLSpanElement>(
     ({ el, gsap }) => {
-      const duration = Math.min(3, Math.max(0.8, value / 40));
+      if (isText) return;
+      const duration = Math.min(3, Math.max(0.8, target / 40));
       gsap.set(el, { opacity: 0 });
       const obj = { val: 0 };
       gsap
@@ -179,7 +185,7 @@ export function CountUp({
         .to(
           obj,
           {
-            val: value,
+            val: target,
             duration,
             delay,
             ease: "power2.out",
@@ -190,12 +196,12 @@ export function CountUp({
           0,
         );
     },
-    [value, decimals, prefix, suffix, delay],
+    [target, isText, value, decimals, prefix, suffix, delay],
   );
 
   return (
     <span ref={ref} className={className}>
-      {format(value)}
+      {format(target)}
     </span>
   );
 }
