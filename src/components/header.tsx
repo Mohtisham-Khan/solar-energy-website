@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { CloseIcon, MenuIcon, SunIcon, WhatsAppIcon } from "@/components/icons";
-import { waLink, site } from "@/lib/site";
+import { waLink, site, WA_GREETING } from "@/lib/site";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -53,9 +53,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
 
-  const waHref = waLink(
-    "Hi Sunhaven Solar! I'd like to learn more about going solar.",
-  );
+  const waHref = waLink(WA_GREETING);
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-white">
@@ -70,7 +68,7 @@ export function Header() {
             <SunIcon className="h-5 w-5" />
           </span>
           <span className="font-display text-lg font-bold tracking-tight text-ink">
-            Sunhaven <span className="text-olive">Solar</span>
+            {site.name}
           </span>
         </Link>
 
@@ -95,7 +93,7 @@ export function Header() {
             className="hidden items-center gap-2 rounded-full bg-wa px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-wa-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:inline-flex"
           >
             <WhatsAppIcon className="h-4 w-4" />
-            Chat on WhatsApp
+            Get Free Quotation
           </a>
 
           <button

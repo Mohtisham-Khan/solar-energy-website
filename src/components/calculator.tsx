@@ -17,7 +17,9 @@ import {
   packageEstimate,
   packageForSize,
   packageSizes,
+  paybackYears,
   pkr,
+  savingEstimate,
   sizeSolarSystem,
   sizingExplanation,
   suitabilityLine,
@@ -49,7 +51,7 @@ export function SolarCalculator() {
   const [entry, setEntry] = useState<"units" | "bill">("units");
   const [units, setUnits] = useState(600);
   const [bill, setBill] = useState(40_000);
-  const [cityId, setCityId] = useState("lahore");
+  const [cityId, setCityId] = useState("karachi");
   const [coveragePct, setCoveragePct] = useState<number>(100);
   const [systemType, setSystemType] = useState<SystemTypeId>("on-grid");
   const [panelWatts, setPanelWatts] = useState(550);
@@ -87,14 +89,26 @@ export function SolarCalculator() {
   const labour = labourEnabled ? labourOptionById(labourId) : null;
   const estimate = packageEstimate(variant, labourEnabled ? labourId : null);
 
+  // Conservative saving + payback, shown only alongside prices (step 2).
+  const saving = savingEstimate(
+    monthlyUnits,
+    sizing.coverageAchievedPct,
+    sizing.monthlyLow,
+    sizing.monthlyHigh,
+  );
+  const paybackLow =
+    estimate.totalPkr != null ? paybackYears(estimate.totalPkr, saving.highPkr) : null;
+  const paybackHigh =
+    estimate.totalPkr != null ? paybackYears(estimate.totalPkr, saving.lowPkr) : null;
+
   const pricingNote =
     "Indicative estimate only — package and labour prices are configurable in the site data and are not a binding quotation. A confirmed quotation follows your roof survey.";
 
   const sizingWa = waLink(
-    `Hi Sunhaven Solar! My calculator estimate: ${sizing.capacityKw} kW system (${sizing.panels} panels), about ${Math.round(sizing.dailyKwh)} kWh/day in ${sizing.city.name}, from ${monthlyUnits} units/month at ${coveragePct}% coverage (${systemType}). Please share a detailed quote.`,
+    `Hello! My calculator estimate: ${sizing.capacityKw} kW system (${sizing.panels} panels), about ${Math.round(sizing.dailyKwh)} kWh/day in ${sizing.city.name}, from ${monthlyUnits} units/month at ${coveragePct}% coverage (${systemType}). Please share a detailed quote.`,
   );
   const packageWa = waLink(
-    `Hi Sunhaven Solar! I'd like a quotation for the ${pkg.capacityKw} kW ${systemType} package (${pkg.panelCount} × ${pkg.panelWatts} W panels)${
+    `Hello! I'd like a quotation for the ${pkg.capacityKw} kW ${systemType} package (${pkg.panelCount} × ${pkg.panelWatts} W panels)${
       labour ? `, including ${labour.label.toLowerCase()}` : ", without installation labour"
     }.${
       estimate.totalPkr != null
@@ -201,7 +215,7 @@ export function SolarCalculator() {
                     className={`${inputClass} mt-2 ${unitsInvalid ? "border-red-500" : ""}`}
                   />
                   <p className="mt-2 text-xs text-muted">
-                    Example: a typical Lahore home uses 300–600 units/month.
+                    Example: a typical Karachi home uses 300–600 units/month.
                     Enter the total number of units (kWh) shown on your bill.
                   </p>
                   {unitsInvalid && (
@@ -232,7 +246,7 @@ export function SolarCalculator() {
                   />
                   <p className="mt-2 text-xs text-muted">
                     We convert it to units using a blended {cfg.avgTariffPerKwh}{" "}
-                    Rs./unit — your DISCO slab rate will differ slightly.
+                    Rs./unit — your K-Electric slab rate will differ slightly.
                     Entering units directly is more accurate.
                   </p>
                   {billInvalid && (
@@ -296,7 +310,12 @@ export function SolarCalculator() {
                   <button
                     key={t.id}
                     type="button"
-                    onClick={() => setSystemType(t.id)}
+                    onClick={() => {
+                      setSystemType(t.id);
+                      // Hybrid/off-grid installs include labour by default;
+                      // on-grid quotes start equipment-only.
+                      setLabourEnabled(t.id !== "on-grid");
+                    }}
                     aria-pressed={systemType === t.id}
                     className={chip(systemType === t.id)}
                   >
@@ -556,7 +575,7 @@ export function SolarCalculator() {
                 type="checkbox"
                 checked={labourEnabled}
                 onChange={(e) => setLabourEnabled(e.target.checked)}
-                className="h-5 w-5 accent-[#16422d]"
+                className="h-5 w-5 accent-[#1f5c46]"
               />
               <span className="text-sm font-semibold text-ink">
                 Include installation labour
@@ -619,6 +638,32 @@ export function SolarCalculator() {
                   {estimate.totalPkr != null ? pkr(estimate.totalPkr) : "—"}
                 </dd>
               </div>
+              {estimate.totalPkr != null && (
+                <>
+                  <div className="flex items-center justify-between gap-3 border-b border-cream/15 pb-3">
+                    <dt className="text-sm text-cream/75">
+                      Typical equipment cost range (est.)
+                    </dt>
+                    <dd className="font-display text-lg font-bold text-cream">
+                      {pkr(cfg.costPerKwLowPkr * sizing.capacityKw)} – {pkr(cfg.costPerKwHighPkr * sizing.capacityKw)}
+                    </dd>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 border-b border-cream/15 pb-3">
+                    <dt className="text-sm text-cream/75">Monthly saving (est.)</dt>
+                    <dd className="font-display text-lg font-bold text-cream">
+                      {pkr(saving.lowPkr)} – {pkr(saving.highPkr)}
+                    </dd>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <dt className="text-sm text-cream/75">Payback period (est.)</dt>
+                    <dd className="font-display text-lg font-bold text-cream">
+                      {paybackLow != null && paybackHigh != null
+                        ? `${paybackLow}–${paybackHigh} years`
+                        : "—"}
+                    </dd>
+                  </div>
+                </>
+              )}
             </dl>
 
             {!estimate.isComplete && (
@@ -655,7 +700,8 @@ export function SolarCalculator() {
                 Package specifications and prices live in the site&apos;s data
                 file, so they can be updated in one place. Equipment cost and
                 installation labour are always shown separately — labour is
-                optional and off by default. Prices above are indicative
+                optional (off by default for on-grid, on by default for
+                hybrid and off-grid systems). Prices above are indicative
                 estimates in Pakistani Rupees (Rs. / PKR), not a binding
                 quotation; a confirmed quotation is required after a roof
                 survey. For a system size estimate with no pricing, go back to

@@ -1,11 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore, useState } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projects } from "@/lib/content";
 import { ArrowUpRight } from "@/components/icons";
+
+type Project = {
+  title: string;
+  description: string;
+  image: { src: string; alt: string };
+  background: { src: string; alt: string };
+};
+
+type StackedProjectsProps = {
+  projects: Project[];
+};
 
 const motionQuery = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -30,58 +38,86 @@ function useReducedMotion() {
  * and the incoming card scales up + fades in over the previous one while its
  * backdrop slides up over the previous backdrop.
  */
-export function StackedProjects() {
+export function StackedProjects({ projects }: StackedProjectsProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const bgRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const reduced = useReducedMotion();
+  const [gsapLoaded, setGsapLoaded] = useState(false);
 
+  // Load GSAP only when component is visible (Intersection Observer)
   useEffect(() => {
-    const wrap = wrapRef.current;
-    if (!wrap || reduced) return;
+    if (!wrapRef.current) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
-      const bgs = bgRefs.current.filter(Boolean) as HTMLDivElement[];
-      if (cards.length < 2) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !gsapLoaded) {
+          setGsapLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
 
-      // first card is the resting state, the rest wait below it
-      gsap.set(cards.slice(1), {
-        scale: 0.86,
-        autoAlpha: 0,
-        transformOrigin: "50% 100%",
-      });
-      // incoming backdrops wait below the stage
-      gsap.set(bgs.slice(1), { yPercent: 100 });
+    observer.observe(wrapRef.current);
+    return () => observer.disconnect();
+  }, [gsapLoaded]);
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrap,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-          invalidateOnRefresh: true,
-        },
-      });
+  // Initialize GSAP animation only after it's loaded and visible
+  useEffect(() => {
+    if (!gsapLoaded || !wrapRef.current || reduced) return;
 
-      cards.slice(1).forEach((card, i) => {
-        tl.to(
-          card,
-          { scale: 1, autoAlpha: 1, ease: "power2.inOut", duration: 1 },
-          i * 1.2,
-        );
-        tl.to(
-          bgs[i + 1],
-          { yPercent: 0, ease: "power1.inOut", duration: 1 },
-          i * 1.2,
-        );
-      });
-    }, wrap);
-    return () => ctx.revert();
-  }, [reduced]);
+    // Dynamic import GSAP only when needed (code splitting)
+    (async () => {
+      const { default: gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
 
-  if (reduced) return <StaticProjects />;
+      const wrap = wrapRef.current;
+      if (!wrap) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+      const ctx = gsap.context(() => {
+        const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
+        const bgs = bgRefs.current.filter(Boolean) as HTMLDivElement[];
+        if (cards.length < 2) return;
+
+        // first card is the resting state, the rest wait below it
+        gsap.set(cards.slice(1), {
+          scale: 0.86,
+          autoAlpha: 0,
+          transformOrigin: "50% 100%",
+        });
+        // incoming backdrops wait below the stage
+        gsap.set(bgs.slice(1), { yPercent: 100 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrap,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        cards.slice(1).forEach((card, i) => {
+          tl.to(
+            card,
+            { scale: 1, autoAlpha: 1, ease: "power2.inOut", duration: 1 },
+            i * 1.2,
+          );
+          tl.to(
+            bgs[i + 1],
+            { yPercent: 0, ease: "power1.inOut", duration: 1 },
+            i * 1.2,
+          );
+        });
+      }, wrap);
+      return () => ctx.revert();
+    })();
+  }, [gsapLoaded, reduced]);
+
+  if (reduced) return <StaticProjects projects={projects} />;
 
   return (
     <div ref={wrapRef} className="relative bg-forest" style={{ height: "380vh" }}>
@@ -101,7 +137,7 @@ export function StackedProjects() {
                 alt=""
                 fill
                 sizes="100vw"
-                preload={i === 0}
+                priority={i === 0}
                 className="origin-top scale-110 object-cover blur-[8px]"
               />
               <div className="absolute inset-0 bg-black/55" />
@@ -114,7 +150,7 @@ export function StackedProjects() {
             Projects
           </span>
           <h2 className="mt-7 text-[clamp(32px,4vw,56px)] font-medium leading-[1.15] tracking-[-0.02em] text-white">
-            Our Solar Projects
+            Our Solar Projects in Karachi
           </h2>
 
           <div className="relative mt-[68px] w-full flex-1">
@@ -131,6 +167,7 @@ export function StackedProjects() {
                   alt={project.image.alt}
                   fill
                   sizes="(max-width: 768px) 88vw, 500px"
+                  priority={i === 0}
                   className="object-cover"
                 />
                 <div className="absolute inset-x-[8.4%] bottom-[7.5%] flex min-h-[32.1%] flex-col justify-between gap-[2cqw] rounded-[12px] bg-white p-[4.8cqw] text-left">
@@ -156,7 +193,7 @@ export function StackedProjects() {
 }
 
 /** Reduced-motion fallback: the same cards laid out in a plain grid. */
-function StaticProjects() {
+function StaticProjects({ projects }: { projects: Project[] }) {
   return (
     <section className="relative isolate overflow-hidden bg-forest py-20 md:py-32">
       <Image
@@ -172,7 +209,7 @@ function StaticProjects() {
           Projects
         </span>
         <h2 className="mt-7 text-[clamp(32px,4vw,56px)] font-medium leading-[1.15] tracking-[-0.02em] text-white">
-          Our Solar Projects
+          Our Solar Projects in Karachi
         </h2>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (

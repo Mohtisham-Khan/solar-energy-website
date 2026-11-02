@@ -15,9 +15,8 @@ export function organizationJsonLd() {
         url: SITE_URL,
         telephone: `+${site.phone}`,
         email: site.email,
-        foundingDate: site.founded,
-        priceRange: "$$",
         image: `${SITE_URL}/opengraph-image`,
+        priceRange: "PKR",
         address: {
           "@type": "PostalAddress",
           ...site.address,
@@ -27,24 +26,18 @@ export function organizationJsonLd() {
           latitude: site.geo.latitude,
           longitude: site.geo.longitude,
         },
+        areaServed: site.serviceAreas.map((area) => ({
+          "@type": "City",
+          name: `${area}, Karachi`,
+        })),
         openingHoursSpecification: [
           {
             "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            opens: "08:00",
-            closes: "18:00",
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Saturday"],
-            opens: "09:00",
-            closes: "14:00",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            opens: "10:00",
+            closes: "20:00",
           },
         ],
-        areaServed: {
-          "@type": "City",
-          name: site.serviceArea,
-        },
         sameAs: [site.social.linkedin, site.social.instagram, site.social.facebook],
       },
       {
@@ -54,7 +47,7 @@ export function organizationJsonLd() {
         name: site.name,
         description: site.description,
         publisher: { "@id": `${SITE_URL}/#business` },
-        inLanguage: "en-US",
+        inLanguage: "en-PK",
       },
     ],
   };
@@ -86,12 +79,12 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
-/** Services page: ItemList of Service offers. */
+/** Services page: ItemList of Service offers, each served in Karachi. */
 export function servicesJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${site.name} services`,
+    name: `${site.name} solar services`,
     itemListElement: services.map((s, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -100,7 +93,10 @@ export function servicesJsonLd() {
         name: s.title,
         description: s.description,
         provider: { "@id": `${SITE_URL}/#business` },
-        areaServed: site.serviceArea,
+        areaServed: site.serviceAreas.map((area) => ({
+          "@type": "City",
+          name: `${area}, Karachi`,
+        })),
         serviceType: s.title,
       },
     })),
@@ -112,12 +108,12 @@ export function calculatorJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Sunhaven Solar Calculator for Pakistan",
+    name: `${site.name} Solar Calculator for Karachi`,
     url: `${SITE_URL}/calculator`,
     applicationCategory: "FinanceApplication",
     operatingSystem: "Any",
     description:
-      "Free solar calculator for Pakistan: recommends a solar system size in kW, panel count and daily/monthly generation from your monthly electricity units (kWh), city and coverage target. Package pricing with installation labour is optional.",
+      "Free solar calculator for Karachi and Pakistan: recommends a solar system size in kW, panel count, estimated cost range, monthly saving and payback from your monthly bill or units. Package pricing with installation labour is optional.",
     offers: {
       "@type": "Offer",
       price: "0",

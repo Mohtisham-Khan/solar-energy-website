@@ -1,11 +1,19 @@
 import Link from "next/link";
 import {  Mail, MapPin, Phone } from "lucide-react";
-import { services } from "@/lib/content";
 import { site } from "@/lib/site";
 import { SunIcon } from "@/components/icons";
 import { FooterSubscribe } from "@/components/footer-subscribe";
 
-const columns = [
+type Service = {
+  slug: string;
+  title: string;
+};
+
+type FooterProps = {
+  services: Service[];
+};
+
+const getColumns = (services: Service[]) => [
   {
     title: "Pages",
     links: [
@@ -45,7 +53,8 @@ const socials = [
   { icon: MapPin, href: site.social.linkedin, label: "LinkedIn" },
 ];
 
-export function Footer() {
+export function Footer({ services }: FooterProps) {
+  const columns = getColumns(services);
   return (
     <footer
       className="bg-cover bg-center pb-14 pt-24 text-ink md:pt-32"
@@ -63,18 +72,18 @@ export function Footer() {
                 <SunIcon className="h-8 w-8" />
               </span>
               <span className="font-display text-4xl font-semibold tracking-tight">
-                Sunhaven
+                {site.name}
               </span>
             </Link>
             <p className="mt-8 max-w-[500px] text-[17px] leading-relaxed text-ink/80">
-              We believe clean energy isn&apos;t the future it&apos;s the present.
-              Every installation brings us closer to a greener planet.
+              Clean energy isn&apos;t the future - it&apos;s the present.
+              Every installation brings us closer to a greener Karachi.
             </p>
           </div>
 
           <div className="mt-16">
             <h2 className="max-w-[360px] text-3xl font-medium leading-snug tracking-tight">
-              Ready to Switch to Solar and Save for Years.
+              Ready to lower your Karachi electricity bill?
             </h2>
             <div className="mt-6">
               <FooterSubscribe />

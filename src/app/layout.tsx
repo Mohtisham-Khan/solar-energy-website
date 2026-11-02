@@ -9,6 +9,26 @@ import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { organizationJsonLd } from "@/lib/seo";
 import { SITE_URL, site } from "@/lib/site";
 
+// Layout-level services data for Footer
+const layoutServices = [
+  {
+    slug: "residential-solar",
+    title: "Residential Solar Installation",
+  },
+  {
+    slug: "commercial-solar",
+    title: "Commercial & Industrial Solar",
+  },
+  {
+    slug: "solar-system-engineering",
+    title: "Solar System Engineering",
+  },
+  {
+    slug: "maintenance-monitoring",
+    title: "Installation & Maintenance",
+  },
+];
+
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-geist",
@@ -24,31 +44,34 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${site.name} — Solar panel installation in Austin, TX`,
+    default: `Solar Company in Karachi | ${site.name}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
-    "solar panels Austin",
-    "solar installation Central Texas",
-    "solar company near me",
-    "residential solar",
-    "commercial solar",
-    "solar battery storage",
-    "solar panel maintenance",
+    "solar panel installation Karachi",
+    "solar system price in Karachi",
+    "5kW solar system price Pakistan",
+    "10kW solar system price",
+    "hybrid solar system Karachi",
+    "solar company in Karachi",
+    "solar installation DHA Karachi",
+    "solar panels installment Pakistan",
+    "net billing Pakistan",
+    "solar maintenance Karachi",
   ],
   openGraph: {
     type: "website",
     url: SITE_URL,
     siteName: site.name,
     locale: site.locale,
-    title: `${site.name} — Solar panel installation in Austin, TX`,
+    title: `Solar Company in Karachi | ${site.name}`,
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Solar panel installation in Austin, TX`,
+    title: `Solar Company in Karachi | ${site.name}`,
     description: site.description,
   },
   robots: {
@@ -67,15 +90,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
+  <html
+    lang="en-PK"
       className={`${geist.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <SmoothScroll />
         <Header />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <Footer services={layoutServices} />
         <WhatsAppFloat />
         <JsonLd data={organizationJsonLd()} />
       </body>

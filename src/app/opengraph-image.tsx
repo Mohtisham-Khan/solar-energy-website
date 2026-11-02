@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
-import { site } from "@/lib/site";
+import { SITE_URL, site } from "@/lib/site";
 
-export const alt = `${site.name} — solar panel installation in Austin, TX`;
+export const alt = `${site.name} - solar panel installation in Karachi`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,8 +15,8 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#0f2a1e",
-          color: "#f8f7f2",
+          backgroundColor: "#fbf7f0",
+          color: "#1e2a23",
           padding: 72,
           position: "relative",
         }}
@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             width: 420,
             height: 420,
             borderRadius: 9999,
-            backgroundColor: "rgba(221, 255, 85, 0.14)",
+            backgroundColor: "rgba(228, 178, 60, 0.22)",
             display: "flex",
           }}
         />
@@ -42,7 +42,7 @@ export default function OpengraphImage() {
             width: 360,
             height: 360,
             borderRadius: 9999,
-            backgroundColor: "rgba(37, 211, 102, 0.12)",
+            backgroundColor: "rgba(31, 92, 70, 0.10)",
             display: "flex",
           }}
         />
@@ -54,20 +54,19 @@ export default function OpengraphImage() {
               width: 84,
               height: 84,
               borderRadius: 24,
-              backgroundColor: "#ddff55",
+              backgroundColor: "#e4b23c",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#0f2a1e",
+              color: "#1e2a23",
               fontSize: 48,
               fontWeight: 700,
             }}
           >
-            S
+            {site.name.replace(/[^A-Za-z0-9]/g, "").charAt(0) || "#"}
           </div>
           <div style={{ fontSize: 44, fontWeight: 700, display: "flex" }}>
-            Sunhaven{" "}
-            <span style={{ color: "#ddff55", marginLeft: 14 }}>Solar</span>
+            {site.name}
           </div>
         </div>
 
@@ -87,11 +86,11 @@ export default function OpengraphImage() {
             style={{
               marginTop: 24,
               fontSize: 32,
-              color: "rgba(248, 247, 242, 0.75)",
+              color: "rgba(30, 42, 35, 0.72)",
               display: "flex",
             }}
           >
-            Rooftop solar &amp; battery storage — Greater Austin, TX
+            Rooftop solar &amp; battery storage - Karachi, Pakistan
           </div>
         </div>
 
@@ -99,8 +98,8 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
-              backgroundColor: "#ddff55",
-              color: "#0f2a1e",
+              backgroundColor: "#e4b23c",
+              color: "#1e2a23",
               borderRadius: 9999,
               padding: "14px 36px",
               fontSize: 30,
@@ -108,12 +107,12 @@ export default function OpengraphImage() {
               display: "flex",
             }}
           >
-            sunhavensolar.com
+            {new URL(SITE_URL).host}
           </div>
           <div
             style={{
-              border: "2px solid rgba(248, 247, 242, 0.3)",
-              color: "#f8f7f2",
+              border: "2px solid rgba(30, 42, 35, 0.3)",
+              color: "#1e2a23",
               borderRadius: 9999,
               padding: "12px 34px",
               fontSize: 30,

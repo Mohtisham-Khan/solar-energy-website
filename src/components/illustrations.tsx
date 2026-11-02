@@ -1,6 +1,6 @@
 /**
  * Hand-built SVG illustrations — fully self-contained, no external images.
- * SkyHills: hero background (Sollas-style sky + rolling hills).
+ * SkyHills: hero background (sky + rolling hills).
  * RoofScene: stylized solar home for About/Contact visuals.
  */
 
@@ -15,25 +15,25 @@ export function SkyHills({ className = "" }: { className?: string }) {
     >
       <defs>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#cfeaff" />
-          <stop offset="0.6" stopColor="#e9f6ff" />
-          <stop offset="1" stopColor="#f4fbf1" />
+          <stop offset="0" stopColor="#dce9e4" />
+          <stop offset="0.6" stopColor="#f0ece1" />
+          <stop offset="1" stopColor="#f7f3ea" />
         </linearGradient>
         <linearGradient id="hillBack" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#bfe3a8" />
-          <stop offset="1" stopColor="#9ccb88" />
+          <stop offset="0" stopColor="#d2dbc7" />
+          <stop offset="1" stopColor="#bfcbaf" />
         </linearGradient>
         <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#8cc47c" />
-          <stop offset="1" stopColor="#6cab64" />
+          <stop offset="0" stopColor="#a7b99b" />
+          <stop offset="1" stopColor="#8da684" />
         </linearGradient>
         <linearGradient id="hillFront" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#5f9f58" />
-          <stop offset="1" stopColor="#42814a" />
+          <stop offset="0" stopColor="#a1935f" />
+          <stop offset="1" stopColor="#857748" />
         </linearGradient>
         <radialGradient id="sunGlow">
-          <stop offset="0" stopColor="#fff7c2" stopOpacity="0.95" />
-          <stop offset="1" stopColor="#fff7c2" stopOpacity="0" />
+          <stop offset="0" stopColor="#f6e6b8" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#f6e6b8" stopOpacity="0" />
         </radialGradient>
       </defs>
 
@@ -41,7 +41,7 @@ export function SkyHills({ className = "" }: { className?: string }) {
 
       {/* sun */}
       <circle cx="1170" cy="140" r="130" fill="url(#sunGlow)" />
-      <circle cx="1170" cy="140" r="56" fill="#ffe98a" />
+      <circle cx="1170" cy="140" r="56" fill="#e4b23c" />
 
       {/* clouds */}
       <g fill="#ffffff" opacity="0.92">
@@ -74,7 +74,7 @@ export function SkyHills({ className = "" }: { className?: string }) {
       />
 
       {/* trees on the middle hill */}
-      <g fill="#3f7d47">
+      <g fill="#3d5f4e">
         <path d="M418 460 l12 -26 12 26 z" />
         <rect x="428" y="458" width="4" height="10" fill="#5b4a33" />
         <path d="M1035 452 l11 -24 11 24 z" />
@@ -85,21 +85,21 @@ export function SkyHills({ className = "" }: { className?: string }) {
 
       {/* little solar house on the back hill */}
       <g>
-        <rect x="120" y="336" width="58" height="36" rx="3" fill="#fdfdf7" />
-        <path d="M112 338 L149 306 L186 338 Z" fill="#31504a" />
+        <rect x="120" y="336" width="58" height="36" rx="3" fill="#fbf7f0" />
+        <path d="M112 338 L149 306 L186 338 Z" fill="#24352c" />
         <g transform="rotate(-18 150 326)">
           <rect x="130" y="317" width="42" height="17" rx="2" fill="#1c3f37" />
           <path
             d="M144 317v17M158 317v17M130 325.5h42"
-            stroke="#7db6a4"
+            stroke="#7d9686"
             strokeWidth="1.2"
           />
         </g>
-        <rect x="140" y="346" width="12" height="26" fill="#e8e6d8" />
+        <rect x="140" y="346" width="12" height="26" fill="#e6ddcd" />
       </g>
 
       {/* birds */}
-      <g stroke="#31504a" strokeWidth="2.4" fill="none" strokeLinecap="round" opacity="0.6">
+      <g stroke="#24352c" strokeWidth="2.4" fill="none" strokeLinecap="round" opacity="0.6">
         <path d="M600 190 q8 -8 16 0 q8 -8 16 0" />
         <path d="M660 220 q6 -6 12 0 q6 -6 12 0" />
       </g>
@@ -117,12 +117,12 @@ export function RoofScene({ className = "" }: { className?: string }) {
     >
       <defs>
         <linearGradient id="rsSky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#d7efff" />
-          <stop offset="1" stopColor="#f2faf3" />
+          <stop offset="0" stopColor="#dce9e4" />
+          <stop offset="1" stopColor="#f7f3ea" />
         </linearGradient>
         <linearGradient id="rsGrass" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#8cc47c" />
-          <stop offset="1" stopColor="#54954f" />
+          <stop offset="0" stopColor="#a1935f" />
+          <stop offset="1" stopColor="#857748" />
         </linearGradient>
         <linearGradient id="rsPanel" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#225146" />
@@ -133,8 +133,8 @@ export function RoofScene({ className = "" }: { className?: string }) {
       <rect width="640" height="480" fill="url(#rsSky)" />
 
       {/* sun */}
-      <circle cx="530" cy="92" r="44" fill="#ffe98a" />
-      <g stroke="#ffd94d" strokeWidth="6" strokeLinecap="round">
+      <circle cx="530" cy="92" r="44" fill="#e4b23c" />
+      <g stroke="#c99a2e" strokeWidth="6" strokeLinecap="round">
         <path d="M530 24v-14M530 174v-14M462 92h-14M612 92h-14M482 44l-10-10M578 44l10-10M482 140l-10 10M578 140l10 10" />
       </g>
 
@@ -152,34 +152,34 @@ export function RoofScene({ className = "" }: { className?: string }) {
 
       {/* house */}
       <g>
-        <rect x="236" y="248" width="196" height="128" rx="6" fill="#fdfdf7" stroke="#16241d" strokeWidth="3" />
-        <path d="M214 252 L334 158 L454 252 Z" fill="#0f2a1e" />
+        <rect x="236" y="248" width="196" height="128" rx="6" fill="#fbf7f0" stroke="#1e2a23" strokeWidth="3" />
+        <path d="M214 252 L334 158 L454 252 Z" fill="#24352c" />
         {/* roof solar panel, aligned with the left slope */}
         <g transform="rotate(-37.5 290 216)">
           <rect x="248" y="200" width="86" height="32" rx="3" fill="url(#rsPanel)" />
-          <path d="M269.5 200v32M291 200v32M312.5 200v32M248 216h86" stroke="#7db6a4" strokeWidth="1.6" />
+          <path d="M269.5 200v32M291 200v32M312.5 200v32M248 216h86" stroke="#7d9686" strokeWidth="1.6" />
         </g>
         {/* door + windows */}
-        <rect x="318" y="300" width="34" height="76" rx="4" fill="#e8e6d8" stroke="#16241d" strokeWidth="2.5" />
-        <rect x="262" y="278" width="36" height="30" rx="4" fill="#cfeaff" stroke="#16241d" strokeWidth="2.5" />
-        <rect x="374" y="278" width="36" height="30" rx="4" fill="#cfeaff" stroke="#16241d" strokeWidth="2.5" />
+        <rect x="318" y="300" width="34" height="76" rx="4" fill="#e6ddcd" stroke="#1e2a23" strokeWidth="2.5" />
+        <rect x="262" y="278" width="36" height="30" rx="4" fill="#dce9e4" stroke="#1e2a23" strokeWidth="2.5" />
+        <rect x="374" y="278" width="36" height="30" rx="4" fill="#dce9e4" stroke="#1e2a23" strokeWidth="2.5" />
       </g>
 
       {/* ground-mount panel array in the yard */}
       <g>
         <g transform="rotate(-14 132 356)">
           <rect x="70" y="326" width="124" height="60" rx="5" fill="url(#rsPanel)" />
-          <path d="M101 326v60M132 326v60M163 326v60M70 346h124M70 366h124" stroke="#7db6a4" strokeWidth="1.6" />
+          <path d="M101 326v60M132 326v60M163 326v60M70 346h124M70 366h124" stroke="#7d9686" strokeWidth="1.6" />
         </g>
-        <path d="M96 404v22M176 392v30" stroke="#31504a" strokeWidth="6" strokeLinecap="round" />
+        <path d="M96 404v22M176 392v30" stroke="#24352c" strokeWidth="6" strokeLinecap="round" />
       </g>
 
       {/* tree */}
       <g>
         <rect x="546" y="330" width="12" height="44" rx="3" fill="#5b4a33" />
-        <circle cx="552" cy="304" r="38" fill="#3f7d47" />
-        <circle cx="524" cy="322" r="24" fill="#4a8c50" />
-        <circle cx="580" cy="322" r="24" fill="#4a8c50" />
+        <circle cx="552" cy="304" r="38" fill="#3d5f4e" />
+        <circle cx="524" cy="322" r="24" fill="#4a6b55" />
+        <circle cx="580" cy="322" r="24" fill="#4a6b55" />
       </g>
     </svg>
   );
@@ -210,40 +210,40 @@ export function ProjectArt({
     >
       <defs>
         <linearGradient id={`${id}-sky`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={variant === "building" ? "#cfe7ff" : "#d9f0ff"} />
-          <stop offset="1" stopColor="#eef8ee" />
+          <stop offset="0" stopColor={variant === "building" ? "#dce9e4" : "#e3ede8"} />
+          <stop offset="1" stopColor="#f7f3ea" />
         </linearGradient>
         <linearGradient id={`${id}-panel`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#225146" />
           <stop offset="1" stopColor="#16392a" />
         </linearGradient>
         <linearGradient id={`${id}-ground`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#8cc47c" />
-          <stop offset="1" stopColor="#4f8f50" />
+          <stop offset="0" stopColor="#a1935f" />
+          <stop offset="1" stopColor="#857748" />
         </linearGradient>
       </defs>
       <rect width="640" height="400" fill={`url(#${id}-sky)`} />
-      <circle cx="540" cy="80" r="40" fill="#ffe98a" />
+      <circle cx="540" cy="80" r="40" fill="#e4b23c" />
 
       {variant === "building" ? (
         <g>
           {/* warehouse */}
-          <rect x="90" y="170" width="460" height="160" rx="6" fill="#f4f4ec" stroke="#0c0c0c" strokeWidth="3" />
-          <rect x="76" y="152" width="488" height="30" rx="6" fill="#0c0c0c" />
+          <rect x="90" y="170" width="460" height="160" rx="6" fill="#fbf7f0" stroke="#1e2a23" strokeWidth="3" />
+          <rect x="76" y="152" width="488" height="30" rx="6" fill="#1e2a23" />
           {/* panel rows on the flat roof */}
           {[0, 1, 2].map((row) => (
             <g key={row} transform={`translate(${120 + row * 150} 112)`}>
               <path d="M0 40 L14 8 L112 8 L98 40 Z" fill={`url(#${id}-panel)`} />
-              <path d="M28 8 L18 40 M56 8 L46 40 M84 8 L74 40 M6 26 L104 26" stroke="#7db6a4" strokeWidth="1.6" />
+              <path d="M28 8 L18 40 M56 8 L46 40 M84 8 L74 40 M6 26 L104 26" stroke="#7d9686" strokeWidth="1.6" />
             </g>
           ))}
           {/* loading bay */}
-          <rect x="140" y="240" width="70" height="90" rx="4" fill="#dfe3da" stroke="#0c0c0c" strokeWidth="2.5" />
-          <rect x="250" y="240" width="70" height="90" rx="4" fill="#dfe3da" stroke="#0c0c0c" strokeWidth="2.5" />
-          <rect x="420" y="250" width="80" height="80" rx="4" fill="#cae6ff" stroke="#0c0c0c" strokeWidth="2.5" />
+          <rect x="140" y="240" width="70" height="90" rx="4" fill="#e6ddcd" stroke="#1e2a23" strokeWidth="2.5" />
+          <rect x="250" y="240" width="70" height="90" rx="4" fill="#e6ddcd" stroke="#1e2a23" strokeWidth="2.5" />
+          <rect x="420" y="250" width="80" height="80" rx="4" fill="#dce9e4" stroke="#1e2a23" strokeWidth="2.5" />
           {/* ground */}
-          <rect x="0" y="330" width="640" height="70" fill="#c9cdbf" />
-          <rect x="0" y="330" width="640" height="6" fill="#b4b9a9" />
+          <rect x="0" y="330" width="640" height="70" fill="#d9d2c4" />
+          <rect x="0" y="330" width="640" height="6" fill="#c4bba9" />
         </g>
       ) : (
         <g>
@@ -254,23 +254,23 @@ export function ProjectArt({
             <g key={row} transform={`translate(${60 + row * 300} ${190 + row * 60})`}>
               <g transform="rotate(-14 110 55)">
                 <rect x="30" y="26" width="170" height="64" rx="5" fill={`url(#${id}-panel)`} />
-                <path d="M72 26v64M115 26v64M158 26v64M30 48h170" stroke="#7db6a4" strokeWidth="1.8" />
+                <path d="M72 26v64M115 26v64M158 26v64M30 48h170" stroke="#7d9686" strokeWidth="1.8" />
               </g>
-              <path d="M56 110v26M186 100v34" stroke="#31504a" strokeWidth="7" strokeLinecap="round" />
+              <path d="M56 110v26M186 100v34" stroke="#24352c" strokeWidth="7" strokeLinecap="round" />
             </g>
           ))}
           {/* battery cabinet */}
           <g>
-            <rect x="510" y="242" width="70" height="96" rx="8" fill="#f4f4ec" stroke="#0c0c0c" strokeWidth="3" />
-            <rect x="524" y="258" width="42" height="26" rx="4" fill="#16422d" />
-            <path d="M545 262l-6 10h6l-3 9 9-12h-6l3-7z" fill="#e4fe55" />
-            <rect x="524" y="296" width="42" height="6" rx="3" fill="#8ba960" />
-            <rect x="524" y="310" width="42" height="6" rx="3" fill="#8ba960" />
+            <rect x="510" y="242" width="70" height="96" rx="8" fill="#fbf7f0" stroke="#1e2a23" strokeWidth="3" />
+            <rect x="524" y="258" width="42" height="26" rx="4" fill="#1f5c46" />
+            <path d="M545 262l-6 10h6l-3 9 9-12h-6l3-7z" fill="#e4b23c" />
+            <rect x="524" y="296" width="42" height="6" rx="3" fill="#8a7b4f" />
+            <rect x="524" y="310" width="42" height="6" rx="3" fill="#8a7b4f" />
           </g>
           {/* trees */}
           <g>
             <rect x="40" y="238" width="10" height="36" rx="3" fill="#5b4a33" />
-            <circle cx="45" cy="222" r="28" fill="#3f7d47" />
+            <circle cx="45" cy="222" r="28" fill="#3d5f4e" />
           </g>
         </g>
       )}
@@ -280,7 +280,7 @@ export function ProjectArt({
 
 /* ----------------------------- hero dashboard ---------------------------- */
 
-/** Static dashboard mockup that sits under the hero (Sollas-style). */
+/** Static dashboard mockup that sits under the hero. */
 export function HeroDashboard({ className = "" }: { className?: string }) {
   const bars = [42, 55, 62, 74, 84, 94, 97, 92, 80, 68, 56, 48];
   return (
@@ -294,7 +294,7 @@ export function HeroDashboard({ className = "" }: { className?: string }) {
         <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
         <span className="h-3 w-3 rounded-full bg-[#28c840]" />
         <span className="ml-4 rounded-full bg-white px-3 py-1 text-xs font-medium text-muted">
-          sunhaven-monitor.app
+          solar-monitor.app
         </span>
       </div>
       <div className="grid gap-4 p-5 md:grid-cols-[1.6fr_1fr] md:p-6">
@@ -342,9 +342,9 @@ export function HeroDashboard({ className = "" }: { className?: string }) {
               Battery
             </p>
             <svg viewBox="0 0 120 70" className="mx-auto mt-1 w-36">
-              <path d="M12 62a48 48 0 0 1 96 0" fill="none" stroke="#e3e3d8" strokeWidth="10" strokeLinecap="round" />
-              <path d="M12 62a48 48 0 0 1 96 0" fill="none" stroke="#8ba960" strokeWidth="10" strokeLinecap="round" strokeDasharray="151" strokeDashoffset="24" />
-              <text x="60" y="58" textAnchor="middle" fontSize="20" fontWeight="700" fill="#16422d" fontFamily="inherit">84%</text>
+              <path d="M12 62a48 48 0 0 1 96 0" fill="none" stroke="#d9d2c4" strokeWidth="10" strokeLinecap="round" />
+              <path d="M12 62a48 48 0 0 1 96 0" fill="none" stroke="#8a7b4f" strokeWidth="10" strokeLinecap="round" strokeDasharray="151" strokeDashoffset="24" />
+              <text x="60" y="58" textAnchor="middle" fontSize="20" fontWeight="700" fill="#1f5c46" fontFamily="inherit">84%</text>
             </svg>
             <p className="text-[11px] text-muted">Charging from solar</p>
           </div>

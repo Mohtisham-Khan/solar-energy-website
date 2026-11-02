@@ -48,7 +48,7 @@ const variants: Record<
     arrow: "",
   },
   ink: {
-    shell: "bg-ink text-cream hover:bg-[#1d1d1d]",
+    shell: "bg-ink text-cream hover:bg-[#2c3a32]",
     circle: "bg-lime text-ink",
     arrow: "",
   },
@@ -70,7 +70,7 @@ const variants: Record<
 };
 
 /**
- * Sollas-style pill CTA: label left, round arrow badge right that swaps
+ * Pill CTA: label left, round arrow badge right that swaps
  * arrows on hover. Internal paths render a Next <Link>, external a plain <a>.
  */
 export function ButtonLink({
